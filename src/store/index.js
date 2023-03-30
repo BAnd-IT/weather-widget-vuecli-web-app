@@ -75,7 +75,7 @@ const store = new Vuex.Store({
     async getUserLocaiton() {
       try {
         let response = await axios.get(
-          `https://ipinfo.io/json?token=25ec73b549150d`
+          `https://ipinfo.io/json?token=${process.env.VUE_APP_IPINFO_API_TOKEN}`
         );
         return response.data;
       } catch (error) {
@@ -99,12 +99,11 @@ const store = new Vuex.Store({
       try {
         await axios
           .get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${payload.city},${payload.country}&units=metric&appid=6d7941780ab2639cb20864db54125426`
+            `https://api.openweathermap.org/data/2.5/weather?q=${payload.city},${payload.country}&units=metric&appid=${process.env.VUE_APP_OPENWEATHERMAP_API_TOKEN}`
           )
           .then((response) => {
             let newWeather = response.data;
             newWeather.location_id = payload.location_id;
-            console.log(newWeather);
             commit("ADD_WEATHER", newWeather);
           })
           .catch((error) => {
