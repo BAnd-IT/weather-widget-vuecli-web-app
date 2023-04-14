@@ -2,7 +2,7 @@
   <div class="locations-list__list">
     <div
       v-for="item in locations"
-      :key="item.id"
+      :key="item.location_id"
       class="locations-list__item js-draggable"
       :data-id="item.location_id"
     >
