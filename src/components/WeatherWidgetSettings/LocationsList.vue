@@ -60,6 +60,7 @@ export default {
     sortable.on("sortable:stop", () => {
       setTimeout(() => {
         const orderedLocations = this.$el.querySelectorAll(".js-draggable");
+
         const ids = Array.prototype.map.call(
           orderedLocations,
           (el) => el.dataset.id
@@ -82,11 +83,17 @@ export default {
   methods: {
     removeLocationItem(item) {
       // Remove weather data
-      let index = this.locations.findIndex((e) => e.id == item.id);
+      let index = this.locations.findIndex(
+        (e) => e.location_id == item.location_id
+      );
+
       this.$store.commit("REMOVE_WEATHER", index);
 
       // Remove location
-      let locations = this.locations.filter((e) => e.id !== item.id);
+      let locations = this.locations.filter(
+        (e) => e.location_id !== item.location_id
+      );
+
       this.$store.dispatch("setLocalStorageLocations", locations);
 
       // User removed all locations
